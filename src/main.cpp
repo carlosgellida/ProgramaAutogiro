@@ -1,11 +1,12 @@
-#include <BasicLinearAlgebra.h>
-using namespace BLA;
+#include <Mathfunctions.h>
 #include <BNOfunctions.h>
-#include <RadioPayload.h>
+#include <RadioPayload2.h>
 
 Matrix<4, 1> qDeseado = {1.0, 1.0, 1.0, 1.0}; 
 
-Matrix<4, 1> qCurrent = {1.0, 1.0, 1.0, 1.0}; 
+Matrix<4, 1> qCurrent = {1.0, 1.0, 1.0, 1.0};  
+
+unsigned long timeLast ; 
 
 void setup() {
 
@@ -16,12 +17,18 @@ void setup() {
   delay(1000) ; 
 
   InitialiceMPU(bno) ; 
+
+  timeLast = micros(); 
 } // setup
 
 void loop() {
 
-  sended = send(bno, qCurrent) ; 
+    if(micros() - timeLast > 9000){
+    timeLast = micros(); 
+    sended = send(bno, qCurrent) ;  
   
-  recieved = recieve(qDeseado);  
+    recieved = recieve(qDeseado);  
+
+  } //if time
 
 } // loop
