@@ -23,7 +23,7 @@ void setup() {
 
 void loop() {
 
-    if(micros() - timeLast > 9000){
+    if(micros() - timeLast > 10000){
     timeLast = micros(); 
     sended = send(bno, qCurrent) ;  
   
